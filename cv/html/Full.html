@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="{{ locale.language_iso_639_1 }}" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The curriculum vitae of {{ cv.name }}, {{ cv.headline }}.">
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="{{ cv.name }} | Curriculum Vitae">
+  <meta property="og:description" content="{{ cv.headline }} working across GIS, flood risk, scientific computing, and cartography.">
+  <meta property="og:url" content="{{ cv.website }}">
+  <title>{{ cv.name }} | Curriculum Vitae</title>
+  <link rel="stylesheet" href="assets/site.css">
+  <script defer src="assets/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#cv">Skip to CV</a>
+  <header class="site-header">
+    <a class="identity" href="#top" aria-label="Back to top">
+      <span class="identity-mark" aria-hidden="true">HB</span>
+      <span>
+        <strong>{{ cv.name }}</strong>
+        <small>{{ cv.headline }}</small>
+      </span>
+    </a>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <a href="#cv">CV</a>
+      <a href="#projects">Projects</a>
+      <a class="download-link" href="Harris_Bienn_CV.pdf">Download PDF</a>
+      <button class="theme-toggle" type="button" aria-label="Switch color theme" aria-pressed="false">Theme</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">Geospatial systems for consequential decisions</p>
+      <h1 id="hero-title">From spatial data to clear, reproducible decisions.</h1>
+      <p class="hero-copy">I build geospatial workflows and decision-support tools for flood risk, hazard assessment, stormwater, coastal applications, and scientific communication.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#cv">Read the CV</a>
+        <a class="button" href="Harris_Bienn_CV.pdf">Printable PDF</a>
+      </div>
+      <dl class="focus-list" aria-label="Professional focus">
+        <div><dt>Practice</dt><dd>GIS and scientific computing</dd></div>
+        <div><dt>Applications</dt><dd>Flood, hazard, and coastal resilience</dd></div>
+        <div><dt>Approach</dt><dd>Reproducible workflows and knowledge transfer</dd></div>
+      </dl>
+    </section>
+
+    <div class="content-grid">
+      <aside class="section-index" aria-label="CV sections">
+        <p>Curriculum vitae</p>
+        <nav data-section-nav></nav>
+      </aside>
+
+      <article class="cv-document" id="cv">
+        {{ html_body|indent(8) }}
+      </article>
+    </div>
+
+    {% set github = namespace(username='harrisbienn') %}
+    {% for account in cv.social_networks or [] %}
+      {% if account.network == 'GitHub' %}
+        {% set github.username = account.username %}
+      {% endif %}
+    {% endfor %}
+    <section class="projects" id="projects" data-github-user="{{ github.username }}" aria-labelledby="projects-title">
+      <div>
+        <p class="eyebrow">Current public work</p>
+        <h2 id="projects-title">Recently updated GitHub projects</h2>
+        <p>Loaded from GitHub when available. The CV above remains the source of truth for professional experience.</p>
+      </div>
+      <div class="project-grid" data-project-grid aria-live="polite">
+        <p class="project-status">Loading public projects...</p>
+      </div>
+      <a class="text-link" href="https://github.com/{{ github.username }}">View all public repositories</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Built from one validated RenderCV source.</p>
+    <a href="#top">Back to top</a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,246 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
+cv:
+  name: Harris Colin Bienn
+  headline: Geospatial practitioner and knowledge broker
+  location: Baton Rouge, Louisiana
+  email: harris.bienn@gmail.com
+  website: https://harrisbienn.github.io
+  social_networks:
+    - network: LinkedIn
+      username: harris-bienn-94a28785
+    - network: GitHub
+      username: harrisbienn
+  custom_connections:
+    - fontawesome_icon: flask
+      placeholder: ResearchGate
+      url: https://www.researchgate.net/profile/Harris_Bienn
+  sections:
+    Career Summary:
+      - Geospatial practitioner and knowledge broker building reproducible geospatial workflows and decision-support tools for flood risk, hazard assessment, stormwater, and coastal applications. My work connects GIS, hydrologic and hydraulic modeling, scientific computing, and cartography.
+
+    Professional Experience:
+      - company: Halff Associates, Inc.
+        position: Technical Manager
+        start_date: 2024
+        end_date: present
+        location: Baton Rouge, Louisiana
+        summary: Builds and maintains reproducible geospatial workflows and decision-support tools for flood risk, hazard assessment, stormwater, and coastal applications.
+        highlights:
+          - Supports enterprise GIS implementation, cloud integration, and migration to modern GIS architecture.
+          - Develops Python-based tools that streamline spatial analysis, data processing, and reporting.
+          - Trains and mentors teams in GIS methods, software, and reproducible workflows.
+      - company: The Water Institute of the Gulf
+        position: Research Scientist
+        start_date: 2014
+        end_date: 2024
+        location: Baton Rouge, Louisiana
+        summary: Conducted geospatial analysis and research and built narratives for scientific communication.
+        highlights:
+          - Developed cartographic, geospatial-processing, and visualization products for coastal and resilience applications.
+          - Contributed to peer-reviewed research on restoration planning, community engagement, vulnerability, and ecosystem conditions.
+      - company: Jacobs Engineering, Exxon Refinery Alliance Group
+        position: Process Technician
+        start_date: 2012
+        end_date: 2013
+        location: Baton Rouge, Louisiana
+        summary: Performed intensive analytical research on major refinery turnaround projects and supported upstream and downstream communication.
+      - company: United States Marine Corps
+        position: Infantry Section Leader and Weapons Platoon Sergeant
+        start_date: 2008
+        end_date: 2012
+        location: Twentynine Palms, California
+        summary: Led a section of more than 15 Marines and a platoon of more than 45 Marines during consecutive combat deployments to Afghanistan.
+
+    Education and Training:
+      - institution: Louisiana State University
+        area: Environmental Engineering
+        degree: BS Eng.
+        start_date: 2012
+        end_date: 2018
+        location: Baton Rouge, Louisiana
+        highlights:
+          - 'Thesis: Assessing the Impact of Urban Flooding on Vulnerable Populations in New Orleans using the Internet of Things'
+      - institution: United States Marine Corps Leadership Academy
+        area: Infantry Squad Leader Course
+        degree: Honors Graduate
+        start_date: 2010
+        end_date: 2011
+        location: Camp Pendleton, California
+        highlights:
+          - Leadership and poise during high-stress situations, with an emphasis on dynamic problem solving.
+
+    Project Contributions and Specialties:
+      - bullet: Advanced geospatial analytics, spatial statistics, and machine-learning applications.
+      - bullet: Hydrologic and hydraulic modeling support for flood risk, hazard modeling, and stormwater management.
+      - bullet: Cartography and scientific visualization for reports, publications, and decision-making.
+      - bullet: Python automation for spatial analysis, data processing, and reporting workflows.
+      - bullet: Integration of commercial and open-source GIS tools and workflows.
+      - bullet: ArcGIS Online and ArcGIS Enterprise implementation, administration, cloud integration, and architecture migration.
+      - bullet: Team training and mentorship in GIS methods, software, and workflow design.
+
+    Technical Proficiencies:
+      - label: Geospatial software
+        details: ArcGIS Pro, ArcGIS Enterprise, ArcGIS Experience Builder, ArcGIS Dashboards, ArcMap, QGIS, OpenStreetMap, MapInfo, and Whitebox Geospatial
+      - label: Programming
+        details: Extensive in Python and SQL; proficient in JavaScript for web GIS, MATLAB, and R
+      - label: Scientific computing
+        details: Project Jupyter, Databricks, RStudio, PyCharm, VS Code, and geospatial machine learning with scikit-learn and TensorFlow
+      - label: Cloud and platforms
+        details: AWS S3, EC2, Lambda, and RDS; ArcGIS Online; macOS and Windows; working proficiency with Linux including Ubuntu and CentOS
+      - label: Modeling and spatial analysis
+        details: ArcGIS ModelBuilder, HAZUS, LiDAR processing, WhiteboxTools, HEC-GeoHMS, HEC-RAS, and SWMM
+      - label: Methods
+        details: Cartography, decision-support tools, geospatial data processing and visualization, network and drive-time analysis, social vulnerability assessment, social return on investment, hazard assessment, resilience assessment, statistical analysis, and GIS integration of hydrologic and hydraulic models
+      - label: Collaboration
+        details: Detail-oriented interdisciplinary collaborator, mentor, and disciplined problem solver with strong written and verbal communication skills
+
+    Peer Reviewed Publications:
+      - title: Supporting habitat restoration in the northern Gulf of Mexico through synthesis of data on multiple and interacting benefits and stressors
+        authors:
+          - E. Kiskaddon
+          - '**H. Bienn**'
+          - S. Hemmerling
+          - S. Dalyander
+          - A. Grismore
+          - J. Parfait
+          - M. Miner
+          - et al.
+        journal: Journal of Environmental Management, 318, 115589
+        doi: 10.1016/j.jenvman.2022.115589
+        date: 2022
+      - title: Engaging coastal community members about natural and nature-based solutions to assess their ecosystem function
+        authors:
+          - M. Baustian
+          - H. Jung
+          - '**H. Bienn**'
+          - M. Barra
+          - S. Hemmerling
+          - Y. Wang
+          - E. White
+          - E. Meselhe
+        journal: 'Ecological Engineering: X, 5, 100015'
+        doi: 10.1016/j.ecoena.2019.100015
+        date: 2020
+      - title: 'Elevating local knowledge through participatory modeling: active community engagement in restoration planning in coastal Louisiana'
+        authors:
+          - S. Hemmerling
+          - M. Barra
+          - '**H. Bienn**'
+          - M. Baustian
+          - H. Jung
+          - E. Meselhe
+          - Y. Wang
+          - E. White
+        journal: Journal of Geographical Systems, 22(2), 241-266
+        doi: 10.1007/s10109-019-00313-2
+        date: 2020
+      - title: 'Double exposure and dynamic vulnerability: Assessing economic well-being, ecological change and the development of the oil and gas industry in coastal Louisiana'
+        authors:
+          - S. Hemmerling
+          - T. Carruthers
+          - A. Hijuelos
+          - '**H. Bienn**'
+        journal: Shore & Beach, 72-82
+        doi: 10.34237/1008819
+        date: 2020
+      - title: Knowledge-based predictive tools to assess effectiveness of natural and nature-based solutions for coastal restoration and protection planning
+        authors:
+          - E. Meselhe
+          - Y. Wang
+          - E. White
+          - H. Jung
+          - M. M. Baustian
+          - S. Hemmerling
+          - M. Barra
+          - '**H. Bienn**'
+        journal: Journal of Hydraulic Engineering, 146(2), 05019007
+        doi: 10.1061/(ASCE)HY.1943-7900.0001659
+        date: 2020
+      - title: 'Gulf-wide data synthesis for restoration planning: Utility and limitations'
+        authors:
+          - L. Moss
+          - T. Carruthers
+          - '**H. Bienn**'
+          - A. McInnis
+          - A. Dausman
+        journal: Shore & Beach, 23-33
+        doi: 10.34237/1008813
+        date: 2020
+      - title: Modeling current and future freshwater inflow needs of a subtropical estuary to manage and maintain forested wetland ecological conditions
+        authors:
+          - M. Baustian
+          - F. Clark
+          - A. Jerabek
+          - Y. Wang
+          - '**H. Bienn**'
+          - E. White
+        journal: Ecological Indicators, 85, 791-807
+        doi: 10.1016/j.ecolind.2017.10.005
+        date: 2018
+
+    Presentations:
+      - name: Assessing the Impact of Urban Flooding on Vulnerable Populations in New Orleans using the Internet of Things
+        date: 2018
+        location: 28th WERC Environmental Design Competition, Las Cruces, New Mexico
+        summary: Oral presentation with E. Franklin, R. Heuisler, and N. Philley.
+      - name: Assessing the Impact of Urban Flooding on Vulnerable Populations in New Orleans using the Internet of Things
+        date: 2018
+        location: 28th WERC Environmental Design Competition, Las Cruces, New Mexico
+        summary: Poster with S. Cook, K. Dugas, E. Franklin, R. Heuisler, N. Philley, and B. Weyenberg.
+
+    Awards and Honors:
+      - name: Best Paper Award 2020
+        date: 2021
+        location: Journal of Geographical Systems
+        summary: Awarded for the participatory modeling paper on active community engagement in coastal Louisiana restoration planning.
+      - name: Judges' Choice
+        date: 2018
+        location: 28th WERC Environmental Design Competition
+        summary: Awarded for the urban flooding and vulnerable populations project.
+      - name: Military service honors
+        date: 2008-2012
+        summary: Honorable discharge; Navy Achievement Medal; Good Conduct Medal; Combat Action Ribbon; Afghanistan Campaign Medals; Certificates of Commendation; Meritorious Mast; and meritorious promotions to Private First Class, Corporal, and Sergeant.
+
+    Community and Interests:
+      - Avid outdoorsman, backpacker, and fisherman with treks throughout the Lower Appalachians, the Sierra Nevada, and Mojave National Preserve.
+      - Experienced technical diver with more than 125 hours underwater, including underwater surveying and search-and-rescue capabilities.
+      - Volunteer experience with Habitat for Humanity, The Nature Conservancy, and the Greater Baton Rouge Food Bank.
+
+design:
+  theme: engineeringclassic
+  page:
+    size: us-letter
+    top_margin: 0.65in
+    bottom_margin: 0.65in
+    left_margin: 0.7in
+    right_margin: 0.7in
+  typography:
+    alignment: left
+  colors:
+    body: rgb(24, 35, 43)
+    name: rgb(18, 78, 74)
+    headline: rgb(51, 74, 80)
+    connections: rgb(18, 78, 74)
+    section_titles: rgb(18, 78, 74)
+    links: rgb(18, 78, 74)
+
+locale:
+  language: english
+
+settings:
+  current_date: today
+  pdf_title: Harris Bienn CV
+  bold_keywords:
+    - Python
+    - SQL
+    - ArcGIS
+    - QGIS
+    - AWS
+  render_command:
+    output_folder: ../dist
+    typst_path: OUTPUT_FOLDER/Harris_Bienn_CV.typ
+    pdf_path: OUTPUT_FOLDER/Harris_Bienn_CV.pdf
+    markdown_path: OUTPUT_FOLDER/Harris_Bienn_CV.md
+    html_path: OUTPUT_FOLDER/index.html
+    png_path: OUTPUT_FOLDER/Harris_Bienn_CV.png
+    dont_generate_png: true
