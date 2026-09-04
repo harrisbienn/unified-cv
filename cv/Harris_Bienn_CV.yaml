@@ -76,6 +76,8 @@ cv:
       - bullet: Python automation for spatial analysis, data processing, and reporting workflows.
       - bullet: Integration of commercial and open-source GIS tools and workflows.
       - bullet: ArcGIS Online and ArcGIS Enterprise implementation, administration, cloud integration, and architecture migration.
+      - bullet: Agentic development with Claude and OpenAI Codex for scoped implementation, code review, testing, and documentation.
+      - bullet: DevOps and delivery automation using Git, GitHub Actions, containerized builds, continuous integration, and reproducible workflows.
       - bullet: Team training and mentorship in GIS methods, software, and workflow design.
 
     Technical Proficiencies:
