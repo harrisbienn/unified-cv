@@ -155,6 +155,103 @@ enhanceTimeline(
   "Select an education or training entry to view its details.",
 );
 
+const specialtyBadges = [
+  {
+    label: "Flood Risk",
+    src: "https://img.shields.io/badge/Flood_Risk-0F6B78?style=flat-square",
+  },
+  {
+    label: "Spatial Analysis",
+    src: "https://img.shields.io/badge/Spatial_Analysis-0F6B78?style=flat-square",
+  },
+  {
+    label: "Scientific Visualization",
+    src: "https://img.shields.io/badge/Scientific_Visualization-0F6B78?style=flat-square",
+  },
+  {
+    label: "Python",
+    src: "https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white",
+  },
+  {
+    label: "ArcGIS",
+    src: "https://img.shields.io/badge/ArcGIS-2C7AC3?style=flat-square&logo=arcgis&logoColor=white",
+  },
+  {
+    label: "SQL",
+    src: "https://img.shields.io/badge/SQL-336791?style=flat-square",
+  },
+  {
+    label: "Claude",
+    src: "https://img.shields.io/badge/Claude-D97757?style=flat-square&logo=anthropic&logoColor=white",
+  },
+  {
+    label: "OpenAI Codex",
+    src: "https://img.shields.io/badge/OpenAI_Codex-412991?style=flat-square&logo=openai&logoColor=white",
+  },
+  {
+    label: "DevOps",
+    src: "https://img.shields.io/badge/DevOps-2088FF?style=flat-square&logo=githubactions&logoColor=white",
+  },
+  {
+    label: "Containers",
+    src: "https://img.shields.io/badge/Containers-2496ED?style=flat-square&logo=docker&logoColor=white",
+  },
+  {
+    label: "AWS",
+    src: "https://img.shields.io/badge/AWS-FF9900?style=flat-square",
+  },
+];
+
+function enhanceSpecialties() {
+  const heading = document.querySelector(
+    "#project-contributions-and-specialties",
+  );
+  const list = heading?.nextElementSibling;
+  if (!heading || list?.tagName !== "UL") return;
+
+  list.classList.add("specialty-grid");
+
+  const showcase = document.createElement("div");
+  showcase.className = "specialty-showcase";
+
+  const label = document.createElement("p");
+  label.className = "specialty-showcase-label";
+  label.textContent = "Working toolkit";
+
+  const badges = document.createElement("div");
+  badges.className = "specialty-badges";
+  badges.setAttribute("role", "list");
+  badges.setAttribute("aria-label", "Highlighted specialties and tools");
+
+  specialtyBadges.forEach((badge) => {
+    const item = document.createElement("span");
+    item.className = "specialty-badge";
+    item.setAttribute("role", "listitem");
+    item.setAttribute("aria-label", badge.label);
+
+    const fallback = document.createElement("span");
+    fallback.className = "specialty-badge-fallback";
+    fallback.textContent = badge.label;
+
+    const image = document.createElement("img");
+    image.alt = "";
+    image.loading = "lazy";
+    image.decoding = "async";
+    image.addEventListener("load", () => item.classList.add("is-loaded"), {
+      once: true,
+    });
+    image.src = badge.src;
+
+    item.append(fallback, image);
+    badges.append(item);
+  });
+
+  showcase.append(label, badges);
+  heading.after(showcase);
+}
+
+enhanceSpecialties();
+
 const projectSection = document.querySelector("[data-github-user]");
 const projectGrid = projectSection?.querySelector("[data-project-grid]");
 
