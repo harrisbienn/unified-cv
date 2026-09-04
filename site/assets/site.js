@@ -58,6 +58,77 @@ if ("IntersectionObserver" in window && sectionNavigation) {
   sectionHeadings.forEach((heading) => observer.observe(heading));
 }
 
+function enhanceExperienceTimeline() {
+  const experienceHeading = document.querySelector("#professional-experience");
+  if (!experienceHeading) return;
+
+  const experienceNodes = [];
+  let currentNode = experienceHeading.nextElementSibling;
+  while (currentNode && currentNode.tagName !== "H1") {
+    experienceNodes.push(currentNode);
+    currentNode = currentNode.nextElementSibling;
+  }
+
+  const entries = [];
+  let currentEntry;
+  for (const node of experienceNodes) {
+    if (node.tagName === "H2") {
+      currentEntry = { heading: node, details: [] };
+      entries.push(currentEntry);
+    } else if (currentEntry) {
+      currentEntry.details.push(node);
+    }
+  }
+
+  if (!entries.length) return;
+
+  const instructions = document.createElement("p");
+  instructions.className = "timeline-instructions";
+  instructions.textContent = "Select a role to view its details.";
+
+  const timeline = document.createElement("div");
+  timeline.className = "experience-timeline";
+  timeline.setAttribute("role", "list");
+
+  entries.forEach((entry) => {
+    const dateNode = entry.details.find((node) => node.tagName === "P");
+    const timelineItem = document.createElement("div");
+    timelineItem.className = "timeline-item";
+    timelineItem.setAttribute("role", "listitem");
+
+    const disclosure = document.createElement("details");
+    disclosure.className = "timeline-entry";
+
+    const summary = document.createElement("summary");
+    const heading = document.createElement("h2");
+    heading.innerHTML = entry.heading.innerHTML;
+
+    if (dateNode) {
+      const date = document.createElement("span");
+      date.className = "timeline-date";
+      date.textContent = dateNode.textContent;
+      heading.append(date);
+    }
+
+    const content = document.createElement("div");
+    content.className = "timeline-content";
+    entry.details.forEach((node) => {
+      if (node !== dateNode) content.append(node);
+    });
+
+    summary.append(heading);
+    disclosure.append(summary, content);
+    timelineItem.append(disclosure);
+    timeline.append(timelineItem);
+    entry.heading.remove();
+    dateNode?.remove();
+  });
+
+  experienceHeading.after(instructions, timeline);
+}
+
+enhanceExperienceTimeline();
+
 const projectSection = document.querySelector("[data-github-user]");
 const projectGrid = projectSection?.querySelector("[data-project-grid]");
 

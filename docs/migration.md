@@ -24,6 +24,7 @@ If a truly separate source repository is preferred, it can publish to a project 
 
 - A browsable HTML CV at the existing account-root URL.
 - A printable PDF generated from the same content.
+- A vertically scrolling professional-experience timeline with collapsed, expandable role details.
 - Live public GitHub project cards with a resilient profile-link fallback.
 - Responsive navigation and a user-selectable light or dark color theme.
 
