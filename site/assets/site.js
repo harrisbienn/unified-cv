@@ -58,20 +58,20 @@ if ("IntersectionObserver" in window && sectionNavigation) {
   sectionHeadings.forEach((heading) => observer.observe(heading));
 }
 
-function enhanceExperienceTimeline() {
-  const experienceHeading = document.querySelector("#professional-experience");
-  if (!experienceHeading) return;
+function enhanceTimeline(headingId, instructionText) {
+  const sectionHeading = document.querySelector(`#${headingId}`);
+  if (!sectionHeading) return;
 
-  const experienceNodes = [];
-  let currentNode = experienceHeading.nextElementSibling;
+  const sectionNodes = [];
+  let currentNode = sectionHeading.nextElementSibling;
   while (currentNode && currentNode.tagName !== "H1") {
-    experienceNodes.push(currentNode);
+    sectionNodes.push(currentNode);
     currentNode = currentNode.nextElementSibling;
   }
 
   const entries = [];
   let currentEntry;
-  for (const node of experienceNodes) {
+  for (const node of sectionNodes) {
     if (node.tagName === "H2") {
       currentEntry = { heading: node, details: [] };
       entries.push(currentEntry);
@@ -84,10 +84,10 @@ function enhanceExperienceTimeline() {
 
   const instructions = document.createElement("p");
   instructions.className = "timeline-instructions";
-  instructions.textContent = "Select a role to view its details.";
+  instructions.textContent = instructionText;
 
   const timeline = document.createElement("div");
-  timeline.className = "experience-timeline";
+  timeline.className = "cv-timeline";
   timeline.setAttribute("role", "list");
 
   entries.forEach((entry) => {
@@ -130,10 +130,17 @@ function enhanceExperienceTimeline() {
     dateNode?.remove();
   });
 
-  experienceHeading.after(instructions, timeline);
+  sectionHeading.after(instructions, timeline);
 }
 
-enhanceExperienceTimeline();
+enhanceTimeline(
+  "professional-experience",
+  "Select a role to view its details.",
+);
+enhanceTimeline(
+  "education-and-training",
+  "Select an education or training entry to view its details.",
+);
 
 const projectSection = document.querySelector("[data-github-user]");
 const projectGrid = projectSection?.querySelector("[data-project-grid]");

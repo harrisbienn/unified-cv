@@ -6,7 +6,7 @@ This repository stages a unified replacement for the RenderCV fork and legacy Je
 
 Edit `cv/Harris_Bienn_CV.yaml`. Do not edit generated files in `dist/`.
 
-RenderCV 2.8 provides the schema, validation, and document renderers. The custom template at `cv/html/Full.html` wraps RenderCV's HTML output in the portfolio layout. Client-side enhancements turn professional experience into a collapsed vertical timeline and load live GitHub project cards; all professional content remains available without JavaScript.
+RenderCV 2.8 provides the schema, validation, and document renderers. The custom template at `cv/html/Full.html` wraps RenderCV's HTML output in the portfolio layout. Client-side enhancements turn professional experience and education and training into collapsed vertical timelines and load live GitHub project cards; all professional content remains available without JavaScript.
 
 ## Build
 

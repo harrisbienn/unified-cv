@@ -351,7 +351,7 @@ main {
   font-size: 0.86rem;
 }
 
-.experience-timeline {
+.cv-timeline {
   position: relative;
   display: grid;
   gap: 1rem;
@@ -359,7 +359,7 @@ main {
   padding-left: 2.15rem;
 }
 
-.experience-timeline::before {
+.cv-timeline::before {
   position: absolute;
   top: 1.45rem;
   bottom: 1.45rem;
@@ -575,7 +575,7 @@ main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .experience-timeline {
+  .cv-timeline {
     padding-left: 1.7rem;
   }
 
@@ -621,13 +621,13 @@ main {
   }
 
   .timeline-instructions,
-  .experience-timeline::before,
+  .cv-timeline::before,
   .timeline-item::before,
   .timeline-entry summary::after {
     display: none;
   }
 
-  .experience-timeline {
+  .cv-timeline {
     display: block;
     padding-left: 0;
   }
