@@ -102,6 +102,12 @@ function enhanceExperienceTimeline() {
     const summary = document.createElement("summary");
     const heading = document.createElement("h2");
     heading.innerHTML = entry.heading.innerHTML;
+    const headingText = Array.from(heading.childNodes).find(
+      (node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim(),
+    );
+    if (headingText) {
+      headingText.textContent = headingText.textContent.replace(/^\s*,\s*/, "");
+    }
 
     if (dateNode) {
       const date = document.createElement("span");
