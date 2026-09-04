@@ -106,7 +106,20 @@ function enhanceTimeline(headingId, instructionText) {
       (node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim(),
     );
     if (headingText) {
-      headingText.textContent = headingText.textContent.replace(/^\s*,\s*/, "");
+      const [affiliationText, locationText] = headingText.textContent
+        .replace(/^\s*,\s*/, "")
+        .split(/\s+--\s+/, 2);
+      const affiliation = document.createElement("span");
+      affiliation.className = "timeline-affiliation";
+      affiliation.textContent = affiliationText.trim();
+      headingText.replaceWith(affiliation);
+
+      if (locationText) {
+        const location = document.createElement("span");
+        location.className = "timeline-location";
+        location.textContent = locationText.trim();
+        affiliation.after(location);
+      }
     }
 
     if (dateNode) {

@@ -446,6 +446,12 @@ main {
   font-size: 1rem;
 }
 
+.timeline-location {
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
 .timeline-date {
   color: var(--warm);
   font-size: 0.75rem;
