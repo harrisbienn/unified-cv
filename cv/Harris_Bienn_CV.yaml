@@ -230,12 +230,6 @@ locale:
 settings:
   current_date: today
   pdf_title: Harris Bienn CV
-  bold_keywords:
-    - Python
-    - SQL
-    - ArcGIS
-    - QGIS
-    - AWS
   render_command:
     output_folder: ../dist
     typst_path: OUTPUT_FOLDER/Harris_Bienn_CV.typ

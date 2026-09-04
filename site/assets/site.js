@@ -58,6 +58,103 @@ if ("IntersectionObserver" in window && sectionNavigation) {
   sectionHeadings.forEach((heading) => observer.observe(heading));
 }
 
+function enhanceTimeline(headingId, instructionText) {
+  const sectionHeading = document.querySelector(`#${headingId}`);
+  if (!sectionHeading) return;
+
+  const sectionNodes = [];
+  let currentNode = sectionHeading.nextElementSibling;
+  while (currentNode && currentNode.tagName !== "H1") {
+    sectionNodes.push(currentNode);
+    currentNode = currentNode.nextElementSibling;
+  }
+
+  const entries = [];
+  let currentEntry;
+  for (const node of sectionNodes) {
+    if (node.tagName === "H2") {
+      currentEntry = { heading: node, details: [] };
+      entries.push(currentEntry);
+    } else if (currentEntry) {
+      currentEntry.details.push(node);
+    }
+  }
+
+  if (!entries.length) return;
+
+  const instructions = document.createElement("p");
+  instructions.className = "timeline-instructions";
+  instructions.textContent = instructionText;
+
+  const timeline = document.createElement("div");
+  timeline.className = "cv-timeline";
+  timeline.setAttribute("role", "list");
+
+  entries.forEach((entry) => {
+    const dateNode = entry.details.find((node) => node.tagName === "P");
+    const timelineItem = document.createElement("div");
+    timelineItem.className = "timeline-item";
+    timelineItem.setAttribute("role", "listitem");
+
+    const disclosure = document.createElement("details");
+    disclosure.className = "timeline-entry";
+
+    const summary = document.createElement("summary");
+    const heading = document.createElement("h2");
+    heading.innerHTML = entry.heading.innerHTML;
+    const headingText = Array.from(heading.childNodes).find(
+      (node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim(),
+    );
+    if (headingText) {
+      const [affiliationText, locationText] = headingText.textContent
+        .replace(/^\s*,\s*/, "")
+        .split(/\s+--\s+/, 2);
+      const affiliation = document.createElement("span");
+      affiliation.className = "timeline-affiliation";
+      affiliation.textContent = affiliationText.trim();
+      headingText.replaceWith(affiliation);
+
+      if (locationText) {
+        const location = document.createElement("span");
+        location.className = "timeline-location";
+        location.textContent = locationText.trim();
+        affiliation.after(location);
+      }
+    }
+
+    if (dateNode) {
+      const date = document.createElement("span");
+      date.className = "timeline-date";
+      date.textContent = dateNode.textContent;
+      heading.append(date);
+    }
+
+    const content = document.createElement("div");
+    content.className = "timeline-content";
+    entry.details.forEach((node) => {
+      if (node !== dateNode) content.append(node);
+    });
+
+    summary.append(heading);
+    disclosure.append(summary, content);
+    timelineItem.append(disclosure);
+    timeline.append(timelineItem);
+    entry.heading.remove();
+    dateNode?.remove();
+  });
+
+  sectionHeading.after(instructions, timeline);
+}
+
+enhanceTimeline(
+  "professional-experience",
+  "Select a role to view its details.",
+);
+enhanceTimeline(
+  "education-and-training",
+  "Select an education or training entry to view its details.",
+);
+
 const projectSection = document.querySelector("[data-github-user]");
 const projectGrid = projectSection?.querySelector("[data-project-grid]");
 
