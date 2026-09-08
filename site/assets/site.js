@@ -559,6 +559,7 @@ function enhanceEntryCards(headingId, cardType) {
       if (node === dateNode) return;
       if (node === militarySummary) {
         body.append(militaryHonorList(node.textContent));
+        node.remove();
       } else {
         body.append(node);
       }
