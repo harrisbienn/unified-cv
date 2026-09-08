@@ -21,6 +21,8 @@ Set `CONTAINER_ENGINE=podman` when Podman is preferred over Docker.
 
 Open `dist/index.html` after a successful build. The output directory also contains `Harris_Bienn_CV.pdf`, `Harris_Bienn_CV.md`, and the intermediate Typst file.
 
+Each build adds content-hash query parameters to the generated stylesheet and script URLs so local previews and GitHub Pages request updated assets after a refresh.
+
 ## Content review
 
 The first normalized draft intentionally omits street address, phone number, and references from the public source. Editorial discrepancies and suggested next updates are tracked in `docs/content-review.md`.
