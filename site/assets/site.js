@@ -604,6 +604,71 @@ enhanceEntryCards("peer-reviewed-publications", "publication");
 enhanceEntryCards("presentations", "presentation");
 enhanceEntryCards("awards-and-honors", "award");
 
+const communityInterestIcons = new Map([
+  ["Outdoor pursuits", "↟"],
+  ["Technical diving", "≈"],
+  ["Community service", "♥"],
+]);
+
+function enhanceCommunityInterests() {
+  const heading = document.querySelector("#community-and-interests");
+  if (!heading) return;
+
+  const entries = [];
+  let currentNode = heading.nextElementSibling;
+  while (currentNode && currentNode.tagName !== "H1") {
+    const nextNode = currentNode.nextElementSibling;
+    if (currentNode.tagName === "P" && currentNode.querySelector("strong")) {
+      entries.push(currentNode);
+    }
+    currentNode = nextNode;
+  }
+
+  if (!entries.length) return;
+
+  const cardList = document.createElement("div");
+  cardList.className = "community-card-list";
+  cardList.setAttribute("role", "list");
+
+  entries.forEach((entry) => {
+    const source = entry.cloneNode(true);
+    const sourceLabel = source.querySelector("strong");
+    const label = sourceLabel?.textContent.replace(/:\s*$/, "").trim();
+    sourceLabel?.remove();
+    const description = source.textContent.replace(/^:\s*/, "").trim();
+    if (!label || !description) return;
+
+    const card = document.createElement("article");
+    card.className = "community-card";
+    card.setAttribute("role", "listitem");
+
+    const icon = document.createElement("span");
+    icon.className = "community-card-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = communityInterestIcons.get(label) || "•";
+
+    const content = document.createElement("div");
+    content.className = "community-card-content";
+
+    const title = document.createElement("h2");
+    title.className = "community-card-title";
+    title.textContent = label;
+
+    const copy = document.createElement("p");
+    copy.className = "community-card-description";
+    copy.textContent = description;
+
+    content.append(title, copy);
+    card.append(icon, content);
+    cardList.append(card);
+    entry.remove();
+  });
+
+  heading.after(cardList);
+}
+
+enhanceCommunityInterests();
+
 const projectSection = document.querySelector("[data-github-user]");
 const projectGrid = projectSection?.querySelector("[data-project-grid]");
 
