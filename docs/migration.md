@@ -28,6 +28,7 @@ To roll back the account-root site without rewriting history, dispatch that work
 - Vertically scrolling professional-experience and education-and-training timelines with collapsed, expandable details.
 - A responsive specialties showcase with optional Shields.io badges and a text fallback.
 - Collapsed technical-proficiency groups with on-demand Shields.io badges and complete local text fallbacks.
+- Distinct publication and presentation cards, with locally hosted first-page or journal-cover thumbnails for publications.
 - Live public GitHub project cards with a resilient profile-link fallback.
 - Responsive navigation and a user-selectable light or dark color theme.
 

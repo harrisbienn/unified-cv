@@ -396,6 +396,170 @@ function enhanceProficiencies() {
 
 enhanceProficiencies();
 
+const publicationThumbnails = new Map([
+  [
+    "10.1016/j.jenvman.2022.115589",
+    {
+      src: "assets/publications/habitat-restoration.jpg",
+      alt: "Cover of the Journal of Environmental Management",
+    },
+  ],
+  [
+    "10.1016/j.ecoena.2019.100015",
+    {
+      src: "assets/publications/coastal-community-nbs.jpg",
+      alt: "First page of Engaging coastal community members about natural and nature-based solutions",
+    },
+  ],
+  [
+    "10.1007/s10109-019-00313-2",
+    {
+      src: "assets/publications/participatory-modeling.jpg",
+      alt: "First page of Elevating local knowledge through participatory modeling",
+    },
+  ],
+  [
+    "10.34237/1008819",
+    {
+      src: "assets/publications/double-exposure.jpg",
+      alt: "First page of Double exposure and dynamic vulnerability",
+    },
+  ],
+  [
+    "10.1061/(ASCE)HY.1943-7900.0001659",
+    {
+      src: "assets/publications/predictive-tools.jpg",
+      alt: "First page of Knowledge-based predictive tools for coastal restoration and protection planning",
+    },
+  ],
+  [
+    "10.34237/1008813",
+    {
+      src: "assets/publications/gulf-wide-data.jpg",
+      alt: "First page of Gulf-wide data synthesis for restoration planning",
+    },
+  ],
+  [
+    "10.1016/j.ecolind.2017.10.005",
+    {
+      src: "assets/publications/freshwater-inflow.jpg",
+      alt: "First page of Modeling current and future freshwater inflow needs of a subtropical estuary",
+    },
+  ],
+]);
+
+function generatedSectionEntries(sectionHeading) {
+  const entries = [];
+  let currentEntry;
+  let currentNode = sectionHeading.nextElementSibling;
+
+  while (currentNode && currentNode.tagName !== "H1") {
+    const nextNode = currentNode.nextElementSibling;
+    if (currentNode.tagName === "H2") {
+      currentEntry = { heading: currentNode, details: [] };
+      entries.push(currentEntry);
+    } else if (currentEntry) {
+      currentEntry.details.push(currentNode);
+    }
+    currentNode = nextNode;
+  }
+
+  return entries;
+}
+
+function normalizePresentationHeading(heading) {
+  const parts = [...heading.children].filter(
+    (child) => child.tagName === "STRONG",
+  );
+  if (parts.length < 2) return;
+
+  const title = document.createElement("span");
+  title.className = "presentation-title";
+  title.textContent = parts[0].textContent;
+
+  const location = document.createElement("span");
+  location.className = "presentation-location";
+  location.textContent = parts[1].textContent;
+
+  heading.replaceChildren(title, location);
+}
+
+function enhanceEntryCards(headingId, cardType) {
+  const sectionHeading = document.querySelector(`#${headingId}`);
+  if (!sectionHeading) return;
+
+  const entries = generatedSectionEntries(sectionHeading);
+  if (!entries.length) return;
+
+  const cardList = document.createElement("div");
+  cardList.className = `cv-card-list ${cardType}-card-list`;
+  cardList.setAttribute("role", "list");
+
+  entries.forEach((entry) => {
+    const card = document.createElement("article");
+    card.className = `cv-entry-card ${cardType}-card`;
+    card.setAttribute("role", "listitem");
+
+    const body = document.createElement("div");
+    body.className = "entry-card-body";
+
+    const dateNode = entry.details.find((node) => node.tagName === "P");
+    if (dateNode) {
+      const date = document.createElement("span");
+      date.className = "entry-card-date";
+      date.textContent = dateNode.textContent;
+      body.append(date);
+      dateNode.remove();
+    }
+
+    entry.heading.classList.add("entry-card-title");
+    if (cardType === "presentation") {
+      normalizePresentationHeading(entry.heading);
+    }
+    body.append(entry.heading);
+
+    entry.details.forEach((node) => {
+      if (node !== dateNode) body.append(node);
+    });
+
+    if (cardType === "publication") {
+      const doiLink = body.querySelector('a[href^="https://doi.org/"]');
+      const thumbnail = publicationThumbnails.get(doiLink?.textContent.trim());
+      if (doiLink && thumbnail) {
+        const thumbnailLink = document.createElement("a");
+        thumbnailLink.className = "publication-thumbnail";
+        thumbnailLink.href = doiLink.href;
+        thumbnailLink.setAttribute(
+          "aria-label",
+          `Open ${entry.heading.textContent.trim()} via DOI`,
+        );
+
+        const image = document.createElement("img");
+        image.src = thumbnail.src;
+        image.alt = thumbnail.alt;
+        image.width = 360;
+        image.height = 480;
+        image.loading = "lazy";
+        image.decoding = "async";
+        image.addEventListener("error", () => thumbnailLink.remove(), {
+          once: true,
+        });
+
+        thumbnailLink.append(image);
+        card.append(thumbnailLink);
+      }
+    }
+
+    card.append(body);
+    cardList.append(card);
+  });
+
+  sectionHeading.after(cardList);
+}
+
+enhanceEntryCards("peer-reviewed-publications", "publication");
+enhanceEntryCards("presentations", "presentation");
+
 const projectSection = document.querySelector("[data-github-user]");
 const projectGrid = projectSection?.querySelector("[data-project-grid]");
 

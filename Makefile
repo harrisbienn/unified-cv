@@ -15,6 +15,7 @@ verify:
 	test -s dist/Harris_Bienn_CV.md
 	test -s dist/assets/site.css
 	test -s dist/assets/site.js
+	test "$$(find dist/assets/publications -type f -name '*.jpg' | wc -l)" -eq 7
 
 clean:
 	$(CONTAINER_ENGINE) run --rm --volume "$(CURDIR):/workspace" --entrypoint sh $(IMAGE_NAME) -c 'rm -rf /workspace/dist'
