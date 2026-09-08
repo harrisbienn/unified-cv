@@ -668,10 +668,6 @@ main {
   transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
-.proficiency-group:nth-child(2n) {
-  --proficiency-tone: var(--warm);
-}
-
 .proficiency-group[open] {
   border-color: color-mix(in srgb, var(--proficiency-tone) 58%, var(--line));
   box-shadow: 0 0.7rem 1.8rem rgb(24 35 41 / 7%);
