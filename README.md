@@ -1,6 +1,6 @@
 # Harris Bienn CV
 
-This repository stages a unified replacement for the RenderCV fork and legacy Jekyll CV site. One validated YAML file drives the public website, printable PDF, and Markdown export.
+This repository is the canonical source for Harris Bienn's CV and website. One validated YAML file drives the public website, printable PDF, and Markdown export.
 
 ## Source of truth
 
@@ -27,4 +27,6 @@ The first normalized draft intentionally omits street address, phone number, and
 
 ## Deployment
 
-The GitHub Actions workflow validates pull requests and deploys pushes to `main` through GitHub Pages. See `docs/migration.md` before changing the existing `harrisbienn.github.io` repository.
+The local workflow validates pull requests and publishes `main` at the [`/unified-cv/` project URL](https://harrisbienn.github.io/unified-cv/). A credential-free workflow in [`harrisbienn.github.io`](https://github.com/harrisbienn/harrisbienn.github.io) also builds this repository's `main` branch for the [account-root site](https://harrisbienn.github.io/), automatically each hour or on manual request.
+
+Make all CV content, template, asset, and build changes here. The account-root repository contains deployment plumbing only. See `docs/migration.md` for publishing and rollback details.
