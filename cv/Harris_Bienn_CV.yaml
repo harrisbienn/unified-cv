@@ -204,9 +204,12 @@ cv:
         summary: Honorable discharge; Navy Achievement Medal; Good Conduct Medal; Combat Action Ribbon; Afghanistan Campaign Medals; Certificates of Commendation; Meritorious Mast; and meritorious promotions to Private First Class, Corporal, and Sergeant.
 
     Community and Interests:
-      - Avid outdoorsman, backpacker, and fisherman with treks throughout the Lower Appalachians, the Sierra Nevada, and Mojave National Preserve.
-      - Experienced technical diver with more than 125 hours underwater, including underwater surveying and search-and-rescue capabilities.
-      - Volunteer experience with Habitat for Humanity, The Nature Conservancy, and the Greater Baton Rouge Food Bank.
+      - label: Outdoor pursuits
+        details: Avid backpacker and angler with treks throughout the Lower Appalachians, the Sierra Nevada, and Mojave National Preserve.
+      - label: Technical diving
+        details: Technical diver with more than 125 hours underwater, including underwater survey and search-and-rescue experience.
+      - label: Community service
+        details: Community volunteer supporting Habitat for Humanity, The Nature Conservancy, and the Greater Baton Rouge Food Bank.
 
 design:
   theme: engineeringclassic
