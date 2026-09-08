@@ -467,21 +467,42 @@ function generatedSectionEntries(sectionHeading) {
   return entries;
 }
 
-function normalizePresentationHeading(heading) {
+function normalizeSplitHeading(heading, titleClass, locationClass) {
   const parts = [...heading.children].filter(
     (child) => child.tagName === "STRONG",
   );
-  if (parts.length < 2) return;
+  if (!parts.length) return;
 
   const title = document.createElement("span");
-  title.className = "presentation-title";
+  title.className = titleClass;
   title.textContent = parts[0].textContent;
 
-  const location = document.createElement("span");
-  location.className = "presentation-location";
-  location.textContent = parts[1].textContent;
+  const normalizedParts = [title];
+  if (parts[1]) {
+    const location = document.createElement("span");
+    location.className = locationClass;
+    location.textContent = parts[1].textContent;
+    normalizedParts.push(location);
+  }
 
-  heading.replaceChildren(title, location);
+  heading.replaceChildren(...normalizedParts);
+}
+
+function militaryHonorList(summary) {
+  const honors = summary
+    .split(/\s*;\s*/)
+    .map((honor) => honor.replace(/^and\s+/i, "").replace(/\.$/, "").trim())
+    .filter(Boolean);
+
+  const list = document.createElement("ul");
+  list.className = "award-honor-list";
+  honors.forEach((honor) => {
+    const item = document.createElement("li");
+    item.textContent = honor.charAt(0).toUpperCase() + honor.slice(1);
+    list.append(item);
+  });
+
+  return list;
 }
 
 function enhanceEntryCards(headingId, cardType) {
@@ -514,12 +535,33 @@ function enhanceEntryCards(headingId, cardType) {
 
     entry.heading.classList.add("entry-card-title");
     if (cardType === "presentation") {
-      normalizePresentationHeading(entry.heading);
+      normalizeSplitHeading(
+        entry.heading,
+        "presentation-title",
+        "presentation-location",
+      );
+    } else if (cardType === "award") {
+      normalizeSplitHeading(entry.heading, "award-title", "award-location");
     }
     body.append(entry.heading);
 
+    const isMilitaryHonors =
+      cardType === "award" &&
+      entry.heading.textContent.trim().toLowerCase() ===
+        "military service honors";
+    const militarySummary = isMilitaryHonors
+      ? entry.details.find(
+          (node) => node !== dateNode && node.tagName === "P",
+        )
+      : null;
+
     entry.details.forEach((node) => {
-      if (node !== dateNode) body.append(node);
+      if (node === dateNode) return;
+      if (node === militarySummary) {
+        body.append(militaryHonorList(node.textContent));
+      } else {
+        body.append(node);
+      }
     });
 
     if (cardType === "publication") {
@@ -559,6 +601,7 @@ function enhanceEntryCards(headingId, cardType) {
 
 enhanceEntryCards("peer-reviewed-publications", "publication");
 enhanceEntryCards("presentations", "presentation");
+enhanceEntryCards("awards-and-honors", "award");
 
 const projectSection = document.querySelector("[data-github-user]");
 const projectGrid = projectSection?.querySelector("[data-project-grid]");
