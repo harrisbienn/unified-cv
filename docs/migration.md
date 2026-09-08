@@ -1,4 +1,4 @@
-# Migration plan
+# Publishing architecture
 
 ## Target architecture
 
@@ -8,17 +8,17 @@ The generated `dist` directory is the GitHub Pages artifact. It is disposable an
 
 ## Preserving harrisbienn.github.io
 
-GitHub reserves the account-root Pages URL for the repository named `harrisbienn.github.io`. The lowest-maintenance migration is therefore to make this new codebase the next generation of that repository rather than introducing a second deployment repository and a cross-repository credential.
+GitHub reserves the account-root Pages URL for the repository named `harrisbienn.github.io`. That repository is therefore retained as a thin publisher while this repository remains the only editable CV and website source.
 
-Recommended cutover:
+Its workflow checks out public `unified-cv/main`, runs this repository's containerized build and verification, and deploys the generated `dist/` artifact. It runs hourly, after deployment-plumbing changes, or by manual dispatch. No source files or generated artifacts are copied into the root repository, and no personal access token or cross-repository write credential is required.
 
-1. Keep the current `harrisbienn.github.io` repository unchanged while this staging repository is reviewed.
-2. Tag the legacy site's last commit and preserve its `master` branch.
-3. Push this repository's `main` branch to `harrisbienn.github.io`.
-4. In the repository's Pages settings, select GitHub Actions as the source.
-5. Run the workflow manually, inspect the deployment, then make subsequent CV updates only in the RenderCV YAML source.
+The root workflow's source-build job has read-only access. Its separate deployment job alone receives `pages: write` and `id-token: write`. A failed build or verification stops before deployment, leaving the last successful site live.
 
-If a truly separate source repository is preferred, it can publish to a project URL without extra credentials. Publishing that separate repository to the account-root URL would require a controlled cross-repository deployment credential and is intentionally deferred.
+## Release and rollback
+
+Merging into `main` immediately updates the project URL. The account-root URL updates on the next hourly publisher run, or immediately when `Publish central CV` is manually dispatched in `harrisbienn.github.io` with `source_ref=main`.
+
+To roll back the account-root site without rewriting history, dispatch that workflow with a known-good commit SHA from this repository. After a fix is merged, dispatch `source_ref=main` to resume current releases. The detailed operational runbook lives in the [root publisher repository](https://github.com/harrisbienn/harrisbienn.github.io/blob/master/docs/deployment.md).
 
 ## Legacy functionality retained
 
