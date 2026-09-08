@@ -673,6 +673,7 @@ enhanceLabeledCardSection("community-and-interests");
 
 const projectSection = document.querySelector("[data-github-user]");
 const projectGrid = projectSection?.querySelector("[data-project-grid]");
+const excludedProjectRepositories = new Set(["harrisbienn"]);
 
 function formatDate(dateString) {
   return new Intl.DateTimeFormat(undefined, {
@@ -719,11 +720,17 @@ async function loadProjects() {
     if (!response.ok) throw new Error(`GitHub returned ${response.status}`);
 
     const repositories = await response.json();
-    const originalRepositories = repositories.filter(
+    const availableRepositories = repositories.filter(
+      (repository) =>
+        !excludedProjectRepositories.has(repository.name.toLowerCase()),
+    );
+    const originalRepositories = availableRepositories.filter(
       (repository) => !repository.fork && !repository.archived,
     );
     const featuredRepositories = (
-      originalRepositories.length ? originalRepositories : repositories
+      originalRepositories.length
+        ? originalRepositories
+        : availableRepositories
     ).slice(0, 4);
 
     projectGrid.replaceChildren();

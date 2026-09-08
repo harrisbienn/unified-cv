@@ -8,6 +8,8 @@ Edit `cv/Harris_Bienn_CV.yaml`. Do not edit generated files in `dist/`.
 
 RenderCV 2.8 provides the schema, validation, and document renderers. The custom template at `cv/html/Full.html` wraps RenderCV's HTML output in the portfolio layout and presents contact details as an icon-linked strip beneath the CV title. Client-side enhancements turn professional experience and education and training into collapsed vertical timelines, present specialties as a Shields.io-enhanced capability grid, organize technical proficiencies into expandable badge groups with on-demand Shields.io icons, place publications, presentations, and awards in distinct static cards, showcase open-source/civic-technology work and community interests in responsive card grids, and load live GitHub project cards. Publication cards include locally hosted first-page or journal-cover thumbnails, while military service honors are presented as an itemized list. All professional content remains available without JavaScript or third-party badge assets.
 
+GitHub project cards use the public repositories endpoint, prefer non-fork and non-archived repositories in recently updated order, and omit names listed in `excludedProjectRepositories` in `site/assets/site.js`.
+
 ## Build
 
 The project uses a container so the host does not need Python, Typst, RenderCV, or their dependencies.
