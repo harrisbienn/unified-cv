@@ -253,6 +253,51 @@ function enhanceSpecialties() {
 
 enhanceSpecialties();
 
+const proficiencyLogos = new Map([
+  ["ArcGIS Pro", "arcgis"],
+  ["ArcGIS Enterprise", "arcgis"],
+  ["ArcGIS Experience Builder", "arcgis"],
+  ["ArcGIS Dashboards", "arcgis"],
+  ["ArcMap", "arcgis"],
+  ["QGIS", "qgis"],
+  ["OpenStreetMap", "openstreetmap"],
+  ["Python (extensive)", "python"],
+  ["JavaScript for web GIS", "javascript"],
+  ["R", "r"],
+  ["Jupyter", "jupyter"],
+  ["Databricks", "databricks"],
+  ["RStudio", "rstudioide"],
+  ["PyCharm", "pycharm"],
+  ["scikit-learn", "scikitlearn"],
+  ["TensorFlow", "tensorflow"],
+  ["ArcGIS Online", "arcgis"],
+  ["macOS", "apple"],
+  ["Linux (working proficiency)", "linux"],
+  ["Ubuntu", "ubuntu"],
+  ["CentOS", "centos"],
+  ["ArcGIS ModelBuilder", "arcgis"],
+]);
+
+function shieldMessage(value) {
+  return value
+    .replaceAll("-", "--")
+    .replaceAll("_", "__")
+    .replaceAll(" ", "_");
+}
+
+function proficiencyShieldUrl(proficiency) {
+  const logo = proficiencyLogos.get(proficiency);
+  const parameters = new URLSearchParams({ style: "flat-square" });
+  if (logo) {
+    parameters.set("logo", logo);
+    parameters.set("logoColor", "white");
+    parameters.set("logoSize", "auto");
+  }
+
+  const message = shieldMessage(proficiency);
+  return `https://img.shields.io/badge/${message}-125e57?${parameters}`;
+}
+
 function enhanceProficiencies() {
   const heading = document.querySelector("#technical-proficiencies");
   if (!heading) return;
@@ -313,11 +358,35 @@ function enhanceProficiencies() {
       const badge = document.createElement("span");
       badge.className = "proficiency-badge";
       badge.setAttribute("role", "listitem");
-      badge.textContent = proficiency;
+      badge.setAttribute("aria-label", proficiency);
+
+      const fallback = document.createElement("span");
+      fallback.className = "proficiency-badge-fallback";
+      fallback.textContent = proficiency;
+
+      const image = document.createElement("img");
+      image.alt = "";
+      image.loading = "lazy";
+      image.decoding = "async";
+      image.dataset.src = proficiencyShieldUrl(proficiency);
+      image.addEventListener("load", () => badge.classList.add("is-shielded"), {
+        once: true,
+      });
+      image.addEventListener("error", () => image.remove(), { once: true });
+
+      badge.append(fallback, image);
       badges.append(badge);
     });
 
     group.append(summary, badges);
+    group.addEventListener("toggle", () => {
+      if (!group.open || group.dataset.shieldsRequested) return;
+      group.dataset.shieldsRequested = "true";
+      group.querySelectorAll("img[data-src]").forEach((image) => {
+        image.src = image.dataset.src;
+        image.removeAttribute("data-src");
+      });
+    });
     accordion.append(group);
     entry.remove();
   });
