@@ -24,6 +24,7 @@ If a truly separate source repository is preferred, it can publish to a project 
 
 - A browsable HTML CV at the existing account-root URL.
 - A printable PDF generated from the same content.
+- An icon-linked contact strip sourced from the RenderCV identity fields.
 - Vertically scrolling professional-experience and education-and-training timelines with collapsed, expandable details.
 - A responsive specialties showcase with optional Shields.io badges and a text fallback.
 - Live public GitHub project cards with a resilient profile-link fallback.

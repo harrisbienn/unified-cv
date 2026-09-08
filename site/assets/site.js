@@ -19,9 +19,10 @@ themeToggle?.addEventListener("click", () => {
 });
 
 const sectionNavigation = document.querySelector("[data-section-nav]");
+const generatedCvTitle = document.querySelector(".cv-heading + h1");
 const sectionHeadings = [
-  ...document.querySelectorAll(".cv-document > h1:not(:first-child)"),
-];
+  ...document.querySelectorAll(".cv-document > h1"),
+].filter((heading) => heading !== generatedCvTitle);
 
 function slugify(value) {
   return value

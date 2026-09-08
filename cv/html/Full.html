@@ -54,6 +54,52 @@
       </aside>
 
       <article class="cv-document" id="cv">
+        <header class="cv-heading">
+          <h1>{{ cv.name }}'s CV</h1>
+          <address class="cv-contact-links" aria-label="Contact details">
+            {% if cv.email %}
+              <a class="cv-contact-link" href="mailto:{{ cv.email }}" aria-label="Email {{ cv.email }}">
+                <span class="cv-contact-icon" aria-hidden="true">@</span>
+                <span>{{ cv.email }}</span>
+              </a>
+            {% endif %}
+            {% if cv.location %}
+              <a class="cv-contact-link" href="https://www.openstreetmap.org/search?query={{ cv.location|urlencode }}" aria-label="View {{ cv.location }} on OpenStreetMap">
+                <span class="cv-contact-icon" aria-hidden="true">⌖</span>
+                <span>{{ cv.location }}</span>
+              </a>
+            {% endif %}
+            {% if cv.website %}
+              <a class="cv-contact-link" href="{{ cv.website }}" aria-label="Visit {{ cv.website.host }}">
+                <span class="cv-contact-icon" aria-hidden="true">↗</span>
+                <span>{{ cv.website.host }}</span>
+              </a>
+            {% endif %}
+            {% for account in cv.social_networks or [] %}
+              <a class="cv-contact-link" href="{{ account.url }}" rel="me" aria-label="Visit {{ cv.name }} on {{ account.network }}">
+                <span class="cv-contact-icon cv-contact-icon-{{ account.network|lower }}" aria-hidden="true">
+                  {%- if account.network == 'LinkedIn' -%}in
+                  {%- elif account.network == 'GitHub' -%}GH
+                  {%- else -%}↗
+                  {%- endif -%}
+                </span>
+                <span>{{ account.network }}</span>
+              </a>
+            {% endfor %}
+            {% for connection in cv.custom_connections or [] %}
+              {% if connection.url %}
+                <a class="cv-contact-link" href="{{ connection.url }}" rel="me" aria-label="Visit {{ cv.name }} on {{ connection.placeholder }}">
+                  <span class="cv-contact-icon" aria-hidden="true">
+                    {%- if connection.placeholder == 'ResearchGate' -%}RG
+                    {%- else -%}↗
+                    {%- endif -%}
+                  </span>
+                  <span>{{ connection.placeholder }}</span>
+                </a>
+              {% endif %}
+            {% endfor %}
+          </address>
+        </header>
         {{ html_body|indent(8) }}
       </article>
     </div>
