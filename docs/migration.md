@@ -29,7 +29,7 @@ To roll back the account-root site without rewriting history, dispatch that work
 - A responsive specialties showcase with optional Shields.io badges and a text fallback.
 - Collapsed technical-proficiency groups with on-demand Shields.io badges and complete local text fallbacks.
 - Distinct publication, presentation, and award cards, with locally hosted first-page or journal-cover thumbnails for publications and an itemized military-honors list.
-- A responsive three-card Community and Interests showcase derived from labeled RenderCV entries.
+- Responsive labeled-card showcases for Open Source and Civic Technology and Community and Interests.
 - Live public GitHub project cards with a resilient profile-link fallback.
 - Responsive navigation and a user-selectable light or dark color theme.
 

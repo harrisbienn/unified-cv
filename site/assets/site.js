@@ -604,14 +604,15 @@ enhanceEntryCards("peer-reviewed-publications", "publication");
 enhanceEntryCards("presentations", "presentation");
 enhanceEntryCards("awards-and-honors", "award");
 
-const communityInterestIcons = new Map([
+const profileCardIcons = new Map([
+  ["BirdNET", "♪"],
+  ["SpatioTemporal Asset Catalog", "◇"],
   ["Outdoor pursuits", "↟"],
-  ["Technical diving", "≈"],
   ["Community service", "♥"],
 ]);
 
-function enhanceCommunityInterests() {
-  const heading = document.querySelector("#community-and-interests");
+function enhanceLabeledCardSection(headingId) {
+  const heading = document.querySelector(`#${headingId}`);
   if (!heading) return;
 
   const entries = [];
@@ -627,7 +628,7 @@ function enhanceCommunityInterests() {
   if (!entries.length) return;
 
   const cardList = document.createElement("div");
-  cardList.className = "community-card-list";
+  cardList.className = "profile-card-list";
   cardList.setAttribute("role", "list");
 
   entries.forEach((entry) => {
@@ -639,23 +640,23 @@ function enhanceCommunityInterests() {
     if (!label || !description) return;
 
     const card = document.createElement("article");
-    card.className = "community-card";
+    card.className = "profile-card";
     card.setAttribute("role", "listitem");
 
     const icon = document.createElement("span");
-    icon.className = "community-card-icon";
+    icon.className = "profile-card-icon";
     icon.setAttribute("aria-hidden", "true");
-    icon.textContent = communityInterestIcons.get(label) || "•";
+    icon.textContent = profileCardIcons.get(label) || "•";
 
     const content = document.createElement("div");
-    content.className = "community-card-content";
+    content.className = "profile-card-content";
 
     const title = document.createElement("h2");
-    title.className = "community-card-title";
+    title.className = "profile-card-title";
     title.textContent = label;
 
     const copy = document.createElement("p");
-    copy.className = "community-card-description";
+    copy.className = "profile-card-description";
     copy.textContent = description;
 
     content.append(title, copy);
@@ -667,7 +668,8 @@ function enhanceCommunityInterests() {
   heading.after(cardList);
 }
 
-enhanceCommunityInterests();
+enhanceLabeledCardSection("open-source-and-civic-technology");
+enhanceLabeledCardSection("community-and-interests");
 
 const projectSection = document.querySelector("[data-github-user]");
 const projectGrid = projectSection?.querySelector("[data-project-grid]");

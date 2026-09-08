@@ -919,14 +919,14 @@ main {
   content: "";
 }
 
-.community-card-list {
+.profile-card-list {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
   gap: 0.8rem;
   margin: 1.15rem 0 2.5rem;
 }
 
-.community-card {
+.profile-card {
   position: relative;
   overflow: hidden;
   min-width: 0;
@@ -939,7 +939,7 @@ main {
   transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
-.community-card::before {
+.profile-card::before {
   position: absolute;
   inset: 0 0 auto;
   height: 3px;
@@ -947,13 +947,13 @@ main {
   content: "";
 }
 
-.community-card:hover {
+.profile-card:hover {
   border-color: color-mix(in srgb, var(--accent) 46%, var(--line));
   box-shadow: 0 0.75rem 2rem rgb(24 35 41 / 7%);
   transform: translateY(-2px);
 }
 
-.community-card-icon {
+.profile-card-icon {
   display: grid;
   width: 2.35rem;
   height: 2.35rem;
@@ -968,14 +968,14 @@ main {
   line-height: 1;
 }
 
-.community-card-title {
+.profile-card-title {
   margin: 0;
   color: var(--ink);
   font-size: 0.96rem;
   line-height: 1.3;
 }
 
-.community-card-description {
+.profile-card-description {
   margin: 0.55rem 0 0;
   color: var(--muted);
   font-size: 0.84rem;
@@ -1076,7 +1076,7 @@ main {
   .focus-list,
   .project-grid,
   .specialty-grid,
-  .community-card-list {
+  .profile-card-list {
     grid-template-columns: 1fr;
   }
 
@@ -1137,7 +1137,7 @@ main {
 
   .cv-entry-card,
   .publication-thumbnail img,
-  .community-card {
+  .profile-card {
     transition: none;
   }
 }
@@ -1325,13 +1325,13 @@ main {
     display: none;
   }
 
-  .community-card-list {
+  .profile-card-list {
     display: block;
     margin-bottom: 0;
   }
 
-  .community-card,
-  .community-card:hover {
+  .profile-card,
+  .profile-card:hover {
     display: flex;
     margin: 0.32rem 0 0;
     padding: 0;
@@ -1341,24 +1341,24 @@ main {
     transform: none;
   }
 
-  .community-card::before,
-  .community-card-icon {
+  .profile-card::before,
+  .profile-card-icon {
     display: none;
   }
 
-  .community-card-title,
-  .community-card-description {
+  .profile-card-title,
+  .profile-card-description {
     display: inline;
     color: black;
     font-size: inherit;
     line-height: inherit;
   }
 
-  .community-card-title::after {
+  .profile-card-title::after {
     content: ": ";
   }
 
-  .community-card-description {
+  .profile-card-description {
     margin: 0;
   }
 }
