@@ -6,7 +6,7 @@ This repository stages a unified replacement for the RenderCV fork and legacy Je
 
 Edit `cv/Harris_Bienn_CV.yaml`. Do not edit generated files in `dist/`.
 
-RenderCV 2.8 provides the schema, validation, and document renderers. The custom template at `cv/html/Full.html` wraps RenderCV's HTML output in the portfolio layout and presents contact details as an icon-linked strip beneath the CV title. Client-side enhancements turn professional experience and education and training into collapsed vertical timelines, present specialties as a Shields.io-enhanced capability grid, and load live GitHub project cards. All professional content remains available without JavaScript or third-party badge assets.
+RenderCV 2.8 provides the schema, validation, and document renderers. The custom template at `cv/html/Full.html` wraps RenderCV's HTML output in the portfolio layout and presents contact details as an icon-linked strip beneath the CV title. Client-side enhancements turn professional experience and education and training into collapsed vertical timelines, present specialties as a Shields.io-enhanced capability grid, organize technical proficiencies into expandable badge groups, and load live GitHub project cards. All professional content remains available without JavaScript or third-party badge assets.
 
 ## Build
 

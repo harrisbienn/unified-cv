@@ -253,6 +253,80 @@ function enhanceSpecialties() {
 
 enhanceSpecialties();
 
+function enhanceProficiencies() {
+  const heading = document.querySelector("#technical-proficiencies");
+  if (!heading) return;
+
+  const entries = [];
+  let currentNode = heading.nextElementSibling;
+  while (currentNode && currentNode.tagName !== "H1") {
+    if (currentNode.tagName === "P" && currentNode.querySelector("strong")) {
+      entries.push(currentNode);
+    }
+    currentNode = currentNode.nextElementSibling;
+  }
+
+  if (!entries.length) return;
+
+  const instructions = document.createElement("p");
+  instructions.className = "proficiency-instructions";
+  instructions.textContent = "Select a category to explore individual proficiencies.";
+
+  const accordion = document.createElement("div");
+  accordion.className = "proficiency-accordion";
+
+  entries.forEach((entry) => {
+    const source = entry.cloneNode(true);
+    const label = source.querySelector("strong");
+    const category = label?.textContent.replace(/:\s*$/, "").trim();
+    label?.remove();
+
+    const proficiencies = source.textContent
+      .replace(/^:\s*/, "")
+      .split(/\s*·\s*/)
+      .map((proficiency) => proficiency.trim())
+      .filter(Boolean);
+
+    if (!category || !proficiencies.length) return;
+
+    const group = document.createElement("details");
+    group.className = "proficiency-group";
+
+    const summary = document.createElement("summary");
+    const categoryLabel = document.createElement("span");
+    categoryLabel.className = "proficiency-category";
+    categoryLabel.textContent = category;
+
+    const count = document.createElement("span");
+    count.className = "proficiency-count";
+    count.textContent = `${proficiencies.length} ${
+      proficiencies.length === 1 ? "proficiency" : "proficiencies"
+    }`;
+    summary.append(categoryLabel, count);
+
+    const badges = document.createElement("div");
+    badges.className = "proficiency-badges";
+    badges.setAttribute("role", "list");
+    badges.setAttribute("aria-label", `${category} proficiencies`);
+
+    proficiencies.forEach((proficiency) => {
+      const badge = document.createElement("span");
+      badge.className = "proficiency-badge";
+      badge.setAttribute("role", "listitem");
+      badge.textContent = proficiency;
+      badges.append(badge);
+    });
+
+    group.append(summary, badges);
+    accordion.append(group);
+    entry.remove();
+  });
+
+  heading.after(instructions, accordion);
+}
+
+enhanceProficiencies();
+
 const projectSection = document.querySelector("[data-github-user]");
 const projectGrid = projectSection?.querySelector("[data-project-grid]");
 
