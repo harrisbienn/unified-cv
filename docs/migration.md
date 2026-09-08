@@ -29,7 +29,8 @@ To roll back the account-root site without rewriting history, dispatch that work
 - A responsive specialties showcase with optional Shields.io badges and a text fallback.
 - Collapsed technical-proficiency groups with on-demand Shields.io badges and complete local text fallbacks.
 - Distinct publication, presentation, and award cards, with locally hosted first-page or journal-cover thumbnails for publications and an itemized military-honors list.
-- Live public GitHub project cards with a resilient profile-link fallback.
+- Responsive labeled-card showcases for Open Source and Civic Technology and Community and Interests.
+- Live public GitHub project cards with an explicit repository exclusion list and a resilient profile-link fallback.
 - Responsive navigation and a user-selectable light or dark color theme.
 
 The old Jekyll configuration and includes are replaced by RenderCV output and a custom HTML wrapper, eliminating the duplicated CV content previously stored in `_config.yml`.

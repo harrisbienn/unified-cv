@@ -203,10 +203,17 @@ cv:
         date: 2008-2012
         summary: Honorable discharge; Navy Achievement Medal; Good Conduct Medal; Combat Action Ribbon; Afghanistan Campaign Medals; Certificates of Commendation; Meritorious Mast; and meritorious promotions to Private First Class, Corporal, and Sergeant.
 
+    Open Source and Civic Technology:
+      - label: BirdNET
+        details: Active open-source contributor.
+      - label: SpatioTemporal Asset Catalog
+        details: Member of the STAC Working Group.
+
     Community and Interests:
-      - Avid outdoorsman, backpacker, and fisherman with treks throughout the Lower Appalachians, the Sierra Nevada, and Mojave National Preserve.
-      - Experienced technical diver with more than 125 hours underwater, including underwater surveying and search-and-rescue capabilities.
-      - Volunteer experience with Habitat for Humanity, The Nature Conservancy, and the Greater Baton Rouge Food Bank.
+      - label: Outdoor pursuits
+        details: Avid backpacker and angler with treks throughout the Lower Appalachians, the Sierra Nevada, and Mojave National Preserve. Technical diver with more than 10 years of experience, including underwater survey and search-and-rescue.
+      - label: Community service
+        details: Community volunteer supporting Habitat for Humanity, The Nature Conservancy, Front Yard Bikes, and the Greater Baton Rouge Food Bank.
 
 design:
   theme: engineeringclassic
@@ -218,6 +225,12 @@ design:
     right_margin: 0.7in
   typography:
     alignment: left
+  section_titles:
+    space_above: 0.3cm
+    space_below: 0.2cm
+  sections:
+    space_between_regular_entries: 1em
+    space_between_text_based_entries: 0.2em
   colors:
     body: rgb(24, 35, 43)
     name: rgb(18, 78, 74)

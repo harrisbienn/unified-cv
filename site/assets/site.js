@@ -604,8 +604,76 @@ enhanceEntryCards("peer-reviewed-publications", "publication");
 enhanceEntryCards("presentations", "presentation");
 enhanceEntryCards("awards-and-honors", "award");
 
+const profileCardIcons = new Map([
+  ["BirdNET", "♪"],
+  ["SpatioTemporal Asset Catalog", "◇"],
+  ["Outdoor pursuits", "↟"],
+  ["Community service", "♥"],
+]);
+
+function enhanceLabeledCardSection(headingId) {
+  const heading = document.querySelector(`#${headingId}`);
+  if (!heading) return;
+
+  const entries = [];
+  let currentNode = heading.nextElementSibling;
+  while (currentNode && currentNode.tagName !== "H1") {
+    const nextNode = currentNode.nextElementSibling;
+    if (currentNode.tagName === "P" && currentNode.querySelector("strong")) {
+      entries.push(currentNode);
+    }
+    currentNode = nextNode;
+  }
+
+  if (!entries.length) return;
+
+  const cardList = document.createElement("div");
+  cardList.className = "profile-card-list";
+  cardList.setAttribute("role", "list");
+
+  entries.forEach((entry) => {
+    const source = entry.cloneNode(true);
+    const sourceLabel = source.querySelector("strong");
+    const label = sourceLabel?.textContent.replace(/:\s*$/, "").trim();
+    sourceLabel?.remove();
+    const description = source.textContent.replace(/^:\s*/, "").trim();
+    if (!label || !description) return;
+
+    const card = document.createElement("article");
+    card.className = "profile-card";
+    card.setAttribute("role", "listitem");
+
+    const icon = document.createElement("span");
+    icon.className = "profile-card-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = profileCardIcons.get(label) || "•";
+
+    const content = document.createElement("div");
+    content.className = "profile-card-content";
+
+    const title = document.createElement("h2");
+    title.className = "profile-card-title";
+    title.textContent = label;
+
+    const copy = document.createElement("p");
+    copy.className = "profile-card-description";
+    copy.textContent = description;
+
+    content.append(title, copy);
+    card.append(icon, content);
+    cardList.append(card);
+    entry.remove();
+  });
+
+  heading.after(cardList);
+}
+
+enhanceLabeledCardSection("open-source-and-civic-technology");
+enhanceLabeledCardSection("community-and-interests");
+
 const projectSection = document.querySelector("[data-github-user]");
 const projectGrid = projectSection?.querySelector("[data-project-grid]");
+const excludedProjectRepositories = new Set(["harrisbienn"]);
 
 function formatDate(dateString) {
   return new Intl.DateTimeFormat(undefined, {
@@ -652,11 +720,17 @@ async function loadProjects() {
     if (!response.ok) throw new Error(`GitHub returned ${response.status}`);
 
     const repositories = await response.json();
-    const originalRepositories = repositories.filter(
+    const availableRepositories = repositories.filter(
+      (repository) =>
+        !excludedProjectRepositories.has(repository.name.toLowerCase()),
+    );
+    const originalRepositories = availableRepositories.filter(
       (repository) => !repository.fork && !repository.archived,
     );
     const featuredRepositories = (
-      originalRepositories.length ? originalRepositories : repositories
+      originalRepositories.length
+        ? originalRepositories
+        : availableRepositories
     ).slice(0, 4);
 
     projectGrid.replaceChildren();
