@@ -31,7 +31,7 @@ cv:
           - Trains and mentors teams in GIS methods, software, and reproducible workflows.
       - company: The Water Institute of the Gulf
         position: Research Scientist
-        start_date: 2014
+        start_date: 2013
         end_date: 2024
         location: Baton Rouge, Louisiana
         summary: Conducted geospatial analysis and research and built narratives for scientific communication.
@@ -81,20 +81,20 @@ cv:
       - bullet: Team training and mentorship in GIS methods, software, and workflow design.
 
     Technical Proficiencies:
-      - label: Geospatial software
-        details: ArcGIS Pro, ArcGIS Enterprise, ArcGIS Experience Builder, ArcGIS Dashboards, ArcMap, QGIS, OpenStreetMap, MapInfo, and Whitebox Geospatial
-      - label: Programming
-        details: Extensive in Python and SQL; proficient in JavaScript for web GIS, MATLAB, and R
-      - label: Scientific computing
-        details: Project Jupyter, Databricks, RStudio, PyCharm, VS Code, and geospatial machine learning with scikit-learn and TensorFlow
-      - label: Cloud and platforms
-        details: AWS S3, EC2, Lambda, and RDS; ArcGIS Online; macOS and Windows; working proficiency with Linux including Ubuntu and CentOS
+      - label: GIS platforms
+        details: ArcGIS Pro · ArcGIS Enterprise · ArcGIS Experience Builder · ArcGIS Dashboards · ArcMap · QGIS · OpenStreetMap · MapInfo · Whitebox Geospatial
+      - label: Languages and scripting
+        details: Python · SQL · JavaScript · MATLAB · R
+      - label: Data science and development
+        details: Jupyter · Databricks · RStudio · PyCharm · VS Code · Geospatial machine learning · scikit-learn · TensorFlow
+      - label: Cloud and systems
+        details: AWS S3 · AWS EC2 · AWS Lambda · AWS RDS · ArcGIS Online · macOS · Windows · Linux · Ubuntu · CentOS
       - label: Modeling and spatial analysis
-        details: ArcGIS ModelBuilder, HAZUS, LiDAR processing, WhiteboxTools, HEC-GeoHMS, HEC-RAS, and SWMM
-      - label: Methods
-        details: Cartography, decision-support tools, geospatial data processing and visualization, network and drive-time analysis, social vulnerability assessment, social return on investment, hazard assessment, resilience assessment, statistical analysis, and GIS integration of hydrologic and hydraulic models
-      - label: Collaboration
-        details: Detail-oriented interdisciplinary collaborator, mentor, and disciplined problem solver with strong written and verbal communication skills
+        details: ArcGIS ModelBuilder · HAZUS · LiDAR processing · WhiteboxTools · HEC-HMS · HEC-RAS · SWMM
+      - label: Applied methods
+        details: Cartography · Decision-support tools · Geospatial data processing · Scientific visualization · Network and drive-time analysis · Social vulnerability assessment · Social return on investment · Hazard assessment · Resilience assessment · Statistical analysis · GIS integration of hydrologic and hydraulic models
+      - label: Leadership and collaboration
+        details: Interdisciplinary collaboration · Team mentorship · GIS training · Workflow design · Technical writing · Verbal communication · Disciplined problem solving · Detail-oriented delivery
 
     Peer Reviewed Publications:
       - title: Supporting habitat restoration in the northern Gulf of Mexico through synthesis of data on multiple and interacting benefits and stressors

@@ -253,6 +253,149 @@ function enhanceSpecialties() {
 
 enhanceSpecialties();
 
+const proficiencyLogos = new Map([
+  ["ArcGIS Pro", "arcgis"],
+  ["ArcGIS Enterprise", "arcgis"],
+  ["ArcGIS Experience Builder", "arcgis"],
+  ["ArcGIS Dashboards", "arcgis"],
+  ["ArcMap", "arcgis"],
+  ["QGIS", "qgis"],
+  ["OpenStreetMap", "openstreetmap"],
+  ["Python", "python"],
+  ["JavaScript", "javascript"],
+  ["R", "r"],
+  ["Jupyter", "jupyter"],
+  ["Databricks", "databricks"],
+  ["RStudio", "rstudioide"],
+  ["PyCharm", "pycharm"],
+  ["scikit-learn", "scikitlearn"],
+  ["TensorFlow", "tensorflow"],
+  ["ArcGIS Online", "arcgis"],
+  ["macOS", "apple"],
+  ["Linux", "linux"],
+  ["Ubuntu", "ubuntu"],
+  ["CentOS", "centos"],
+  ["ArcGIS ModelBuilder", "arcgis"],
+]);
+
+function shieldMessage(value) {
+  return value
+    .replaceAll("-", "--")
+    .replaceAll("_", "__")
+    .replaceAll(" ", "_");
+}
+
+function proficiencyShieldUrl(proficiency) {
+  const logo = proficiencyLogos.get(proficiency);
+  const parameters = new URLSearchParams({ style: "flat-square" });
+  if (logo) {
+    parameters.set("logo", logo);
+    parameters.set("logoColor", "white");
+    parameters.set("logoSize", "auto");
+  }
+
+  const message = shieldMessage(proficiency);
+  return `https://img.shields.io/badge/${message}-125e57?${parameters}`;
+}
+
+function enhanceProficiencies() {
+  const heading = document.querySelector("#technical-proficiencies");
+  if (!heading) return;
+
+  const entries = [];
+  let currentNode = heading.nextElementSibling;
+  while (currentNode && currentNode.tagName !== "H1") {
+    if (currentNode.tagName === "P" && currentNode.querySelector("strong")) {
+      entries.push(currentNode);
+    }
+    currentNode = currentNode.nextElementSibling;
+  }
+
+  if (!entries.length) return;
+
+  const instructions = document.createElement("p");
+  instructions.className = "proficiency-instructions";
+  instructions.textContent = "Select a category to explore individual proficiencies.";
+
+  const accordion = document.createElement("div");
+  accordion.className = "proficiency-accordion";
+
+  entries.forEach((entry) => {
+    const source = entry.cloneNode(true);
+    const label = source.querySelector("strong");
+    const category = label?.textContent.replace(/:\s*$/, "").trim();
+    label?.remove();
+
+    const proficiencies = source.textContent
+      .replace(/^:\s*/, "")
+      .split(/\s*·\s*/)
+      .map((proficiency) => proficiency.trim())
+      .filter(Boolean);
+
+    if (!category || !proficiencies.length) return;
+
+    const group = document.createElement("details");
+    group.className = "proficiency-group";
+
+    const summary = document.createElement("summary");
+    const categoryLabel = document.createElement("span");
+    categoryLabel.className = "proficiency-category";
+    categoryLabel.textContent = category;
+
+    const count = document.createElement("span");
+    count.className = "proficiency-count";
+    count.textContent = `${proficiencies.length} ${
+      proficiencies.length === 1 ? "proficiency" : "proficiencies"
+    }`;
+    summary.append(categoryLabel, count);
+
+    const badges = document.createElement("div");
+    badges.className = "proficiency-badges";
+    badges.setAttribute("role", "list");
+    badges.setAttribute("aria-label", `${category} proficiencies`);
+
+    proficiencies.forEach((proficiency) => {
+      const badge = document.createElement("span");
+      badge.className = "proficiency-badge";
+      badge.setAttribute("role", "listitem");
+      badge.setAttribute("aria-label", proficiency);
+
+      const fallback = document.createElement("span");
+      fallback.className = "proficiency-badge-fallback";
+      fallback.textContent = proficiency;
+
+      const image = document.createElement("img");
+      image.alt = "";
+      image.loading = "lazy";
+      image.decoding = "async";
+      image.dataset.src = proficiencyShieldUrl(proficiency);
+      image.addEventListener("load", () => badge.classList.add("is-shielded"), {
+        once: true,
+      });
+      image.addEventListener("error", () => image.remove(), { once: true });
+
+      badge.append(fallback, image);
+      badges.append(badge);
+    });
+
+    group.append(summary, badges);
+    group.addEventListener("toggle", () => {
+      if (!group.open || group.dataset.shieldsRequested) return;
+      group.dataset.shieldsRequested = "true";
+      group.querySelectorAll("img[data-src]").forEach((image) => {
+        image.src = image.dataset.src;
+        image.removeAttribute("data-src");
+      });
+    });
+    accordion.append(group);
+    entry.remove();
+  });
+
+  heading.after(instructions, accordion);
+}
+
+enhanceProficiencies();
+
 const projectSection = document.querySelector("[data-github-user]");
 const projectGrid = projectSection?.querySelector("[data-project-grid]");
 
